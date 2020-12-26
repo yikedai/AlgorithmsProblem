@@ -18,9 +18,36 @@ public class LeetCodeMethods {
 	public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 		//leetcode 2
 		ListNode result = new ListNode();
+		int firstNum = 0;
+		int secondNum = 0;
 		
+		int count=1;
+		while (l1.next!=null) {
+			firstNum+=(l1.val)*count*10;
+			count++;
+			l1=l1.next;
+		}
 		
+		count=1;
+		while (l2.next!=null) {
+			secondNum+=(l2.val)*count*10;
+			count++;
+			l1=l1.next;
+		}
 		
+		int num = firstNum+secondNum;
+		ListNode tempNode = new ListNode();
+		if(num==0) {
+			result.val=0;
+		}
+		else {
+			while (num!=0) {
+				result.val=num%10;
+				result.next=tempNode;
+				tempNode.val=num%10;
+				num=num/10;
+			}
+		}
 		return result;
 	}
 	
