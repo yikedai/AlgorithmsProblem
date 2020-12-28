@@ -87,7 +87,7 @@ public class LeetCodeMethods {
 		}
 		
 		if(nums3.length%2==0) {
-			result = ((double)(nums3[(nums3.length)/2]+nums3[(nums3.length)/2+1]))/2;
+			result = ((double)(nums3[(nums3.length)/2]+nums3[(nums3.length)/2-1]))/2;
 		}
 		else {
 			result = nums3[nums3.length/2];
