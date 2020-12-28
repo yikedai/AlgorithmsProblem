@@ -51,57 +51,55 @@ public class LeetCodeMethods {
 		return result;
 	}
 	
+	public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        //leetcode 4
+		double result = 0;
+		int[] nums3 = new int[nums1.length+nums2.length];
+		
+		int num1position = 0;
+		int num2position = 0;
+		int num3position = 0;
+		
+		while(num1position<nums1.length&&num2position<nums2.length) {
+			
+			if(nums1[num1position]<nums2[num2position]) {
+				nums3[num3position]=nums1[num1position];
+				num3position++;
+				num1position++;
+			}
+			else {
+				nums3[num3position]=nums2[num2position];
+				num3position++;
+				num2position++;
+			}
+		}
+		
+		while(num1position<nums1.length) {
+			nums3[num3position]=nums1[num1position];
+			num3position++;
+			num1position++;
+		}
+		
+		while(num2position<nums2.length) {
+			nums3[num3position]=nums2[num2position];
+			num3position++;
+			num2position++;
+		}
+		
+		if(nums3.length%2==0) {
+			result = ((double)(nums3[(nums3.length)/2]+nums3[(nums3.length)/2+1]))/2;
+		}
+		else {
+			result = nums3[nums3.length/2];
+		}
+		
+		return result;
+    }
+	
 	public int strongPasswordChecker(String password) {
 		//leetcode 420
 		//need modification on repeating
 		int count = 0;
-		if(password.length()<6||password.length()>20) {
-			count++;
-		}
-		
-		int upperCaseCount = 0;
-		int lowerCaseCount = 0;
-		int digitCount = 0;
-		
-		for(int i=0; i<password.length(); i++) {
-			if(Character.isUpperCase(password.charAt(i))==true) {
-				upperCaseCount++;
-			}
-			
-			if(Character.isLowerCase(password.charAt(i))==true) {
-				lowerCaseCount++;
-			}
-			
-			if(Character.isDigit(password.charAt(i))==true) {
-				digitCount++;
-			}
-		}
-		
-		if(upperCaseCount==0) {
-			count++;
-		}
-		if(lowerCaseCount==0) {
-			count++;
-		}
-		if(digitCount==0) {
-			count++;
-		}
-		
-		boolean repeating = false;
-		
-		if(password.length()>2) {
-			for(int i=0; i<password.length()-2; i++) {
-				String s = password.substring(i, i+3);
-				if(s.charAt(0)==s.charAt(1)&&s.charAt(0)==s.charAt(2)) {
-					repeating = true;
-					break;
-				}
-			}
-		}
-		
-		if(repeating==true) {
-			count++;
-		}
 		
 		return count;
 	}
