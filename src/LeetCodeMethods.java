@@ -61,7 +61,6 @@ public class LeetCodeMethods {
 		int num3position = 0;
 		
 		while(num1position<nums1.length&&num2position<nums2.length) {
-			
 			if(nums1[num1position]<nums2[num2position]) {
 				nums3[num3position]=nums1[num1position];
 				num3position++;
@@ -95,6 +94,45 @@ public class LeetCodeMethods {
 		
 		return result;
     }
+	
+	public String longestPalindrome(String s) {
+        //leetcode 5
+		String result = "";
+		int substringLength = 0;
+		
+		if(isPalindrome(s)==true) {
+			return s;
+		}
+		else {
+			for(int i=0; i<s.length(); i++) {
+				for(int j=s.length(); j>i; j--) {
+					String sub = s.substring(i, j);
+					if(isPalindrome(sub)==true) {
+						if(substringLength < sub.length()) {
+							result = sub;
+							substringLength = sub.length();
+							break;
+						}
+					}
+				}
+			}
+		}
+		
+		return result;
+    }
+	
+	private boolean isPalindrome(String s) {
+		boolean result = false;
+		for(int i=0; i<(s.length()/2); i++) {
+			if(s.charAt(i)==s.charAt(s.length()-1-i)) {
+				result = true;
+			}
+			else {
+				return false;
+			}
+		}
+		return result;
+	}
 	
 	public int strongPasswordChecker(String password) {
 		//leetcode 420
