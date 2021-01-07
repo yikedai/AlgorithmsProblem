@@ -7,8 +7,9 @@ public class LeetCodeProblems {
 		
 		//System.out.println(lcm.longestPalindrome("ababacbbcab"));
 		
+		//System.out.println(lcm.convert("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 7));
 		
-		System.out.println(lcm.convert("ABCDEFGHIJK", 4));
+		System.out.println(lcm.reverse(-12303));
 	}
 
 }

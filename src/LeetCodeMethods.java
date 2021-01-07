@@ -186,6 +186,26 @@ public class LeetCodeMethods {
 		return result;
     }
 	
+	public int reverse(int x) {
+		//leetcode 7
+		String indicator = "";
+		if(x<0) {
+			indicator = "-";
+		}
+		
+		String s = indicator+reverseString(String.valueOf(Math.abs(x)));
+		int result = Integer.parseInt(s);
+		return result;
+    }
+	
+	private String reverseString(String s) {
+		String result = "";
+		for (int i=s.length()-1; i>=0; i--) {
+			result += s.charAt(i);
+		}
+		return result;
+	}
+	
 	public int strongPasswordChecker(String password) {
 		//leetcode 420
 		//need modification on repeating
