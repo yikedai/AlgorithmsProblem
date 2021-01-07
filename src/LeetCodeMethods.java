@@ -134,6 +134,58 @@ public class LeetCodeMethods {
 		return result;
 	}
 	
+	public String convert(String s, int numRows) {
+		//leetcode 6
+		String result = "";
+		char [] arrayOfS = s.toCharArray();
+		
+		int numOfChar = arrayOfS.length;
+		int unit = 2*numRows-2;
+		int numColumn = 0;
+		
+		if(numOfChar%(unit)<=numRows) {
+			numColumn = (numOfChar/unit)*(numRows-1)+1;
+		}
+		else {
+			numColumn = (numOfChar/unit)*(numRows-1)+1+numOfChar%(unit)-numRows;
+		}
+		
+		char [][] twoDimensionArray = new char [numRows][numColumn];
+		
+		int rowPosition = 0;
+		int columnPosition = 0;
+		
+		int charPosition = 0;
+		while (charPosition<numOfChar) {
+			twoDimensionArray[rowPosition][columnPosition] = s.charAt(charPosition);
+			if((charPosition%unit)<numRows) {
+				if(rowPosition<(numRows-1)) {
+					rowPosition++;
+				}
+				else {
+					rowPosition--;
+					columnPosition++;
+				}
+			}
+			else {
+				rowPosition--;
+				columnPosition++;
+			}
+			charPosition++;
+		}
+		
+		for (int i=0; i<numRows; i++) {
+			for(int j=0; j<numColumn; j++) {
+				if(twoDimensionArray[i][j]==0) {
+					twoDimensionArray[i][j]=' ';
+				}
+				result += twoDimensionArray[i][j];
+			}
+			result += "\n";
+		}		
+		return result;
+    }
+	
 	public int strongPasswordChecker(String password) {
 		//leetcode 420
 		//need modification on repeating
