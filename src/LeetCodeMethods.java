@@ -1,3 +1,10 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.Stack;
 
 public class LeetCodeMethods {
 	
@@ -241,6 +248,14 @@ public class LeetCodeMethods {
 		return 0;
     }
 	
+	private boolean isOutRange(int x) {
+		if(Math.abs(x)>Math.pow(2, 31)) {
+			return true;
+		}
+		return false;
+	}
+	
+	
 	public int maxArea(int[] height) {
         //leetcode 11
 		int area = 0;
@@ -264,13 +279,276 @@ public class LeetCodeMethods {
 		return area;
     }
 	
-	private boolean isOutRange(int x) {
-		if(Math.abs(x)>Math.pow(2, 31)) {
-			return true;
-		}
-		return false;
-	}
+    public String intToRoman(int num) {
+    	//leetcode 12
+    	String result = "";
+    	
+    	
+    	
+    	return result;
+    }
+    
+    public String longestCommonPrefix(String[] strs) {
+    	//leetcode 14
+    	String prefix = strs[0];
+    	for(int i=1; i<strs.length; i++) {
+    		if(prefix.length()>strs[i].length()) {
+    			prefix = prefix.substring(0,strs[i].length());
+    		}
+    		String s = strs[i];
+    		while(prefix.length()>0) {
+    			if(s.substring(0,prefix.length()).equals(prefix)==false) {
+    				prefix = prefix.substring(0, prefix.length()-1);
+    			}
+    			else {
+    				break;
+    			}
+    		}
+    	}
+    	
+    	return prefix;
+    }
 	
+    public List<List<Integer>> threeSum(int[] nums) {
+    	//leetcode 15
+    	List<List<Integer>> results = new ArrayList<List<Integer>>();
+    	List<Integer> option = new ArrayList<Integer>();
+    	
+    	if(nums.length<3) {
+    		return new ArrayList<List<Integer>>();
+    	}
+    	
+    	for(int i=0; i<nums.length-2; i++) {
+    		for(int j=i+1; j<nums.length-1; j++) {
+    			for(int k=j+1; k<nums.length; k++) {
+    				if(nums[i]+nums[j]+nums[k]==0) {
+    					option.add(nums[i]);
+    					option.add(nums[j]);
+    					option.add(nums[k]);
+    					results.add(option);
+    				}
+    				option=new ArrayList<Integer>();
+    			}
+    		}
+    	}
+    	
+    	return results;
+    }
+    
+    public int threeSumClosest(int[] nums, int target) {
+    	//leetcode 16
+    	int result = 0;
+    	int df = Math.abs(nums[0]+nums[1]+nums[2]-target);
+    	
+    	for(int i=0; i<nums.length-2; i++) {
+    		for(int j=i+1; j<nums.length-1; j++) {
+    			for(int k=j+1; k<nums.length; k++) {
+    				int sum = nums[i]+nums[j]+nums[k];
+    				if(Math.abs(sum-target)<=df) {
+    					df = Math.abs(sum-target);
+    					result = sum;
+    				}
+    			}
+    		}
+    	}
+    	return result;
+    }
+    
+    public List<String> letterCombinations(String digits) {
+        //leetcode 17
+    	ArrayList<String> result = new ArrayList<String>();
+    	
+    	if(digits.length()==0) {
+    		return new ArrayList<String>();
+    	}
+    	
+    	if(digits.length()==1) {
+    		for(int i=0; i<digits.length(); i++) {
+    			result.add(String.valueOf(digits.charAt(i)));
+    		}
+    		return result;
+    	}
+    	
+    	String[] phone = new String[digits.length()];
+    	
+    	ArrayList<String> combination = new ArrayList<String>();
+    	ArrayList<String> tempList = new ArrayList<String>();
+    	
+    	for(int i=0; i<digits.length(); i++) {
+    		phone[i] = retrieveLetterArray(digits.charAt(i));
+    	}
+    	
+    	for(int i=0; i<phone[0].length(); i++) {
+    		tempList.add(String.valueOf(phone[0].charAt(i)));
+    	}
+    	
+    	int position = 1;
+    	while(position<phone.length) {
+	    	for(int i=0; i<tempList.size(); i++) {
+	    		for(int j=0; j<phone[position].length(); j++) {
+	    			String s = tempList.get(i)+String.valueOf(phone[position].charAt(j));
+	    			combination.add(s);
+	    		}
+	    	}
+	    	tempList = combination;
+	    	combination = new ArrayList<String>();
+	    	position++;
+    	}
+
+    	result = tempList;
+    	return result;
+    }
+    
+    public String retrieveLetterArray(char c){
+    	String result="";
+    	
+    	switch(c) {
+    	case '2':
+    		result = "abc";
+    		break;
+    	case '3':
+    		result = "def";
+    		break;
+    	case '4':
+    		result = "ghi";
+    		break;
+    	case '5':
+    		result = "jkl";
+    		break;
+    	case '6':
+    		result = "mno";
+    		break;
+    	case '7':
+    		result = "pqrs";
+    		break;
+    	case '8':
+    		result = "tuv";
+    		break;
+    	case '9':
+    		result = "wxyz";
+    		break;
+    	}
+    	return result;
+    }
+    
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        //leetcode 18
+    	List<List<Integer>> result = new ArrayList();
+    	List<Integer> option = new ArrayList<Integer>();
+    	for(int i=0; i<nums.length-3; i++) {
+    		for(int j=i+1; j<nums.length-2; j++) {
+    			for(int k=j+1; k<nums.length-1; k++) {
+    				for(int l=k+1; l<nums.length; l++) {
+    					int sum = nums[i]+nums[j]+nums[k]+nums[l];
+    					if(sum==target) {
+        					option.add(nums[i]);
+        					option.add(nums[j]);
+        					option.add(nums[k]);
+        					option.add(nums[l]);
+        					result.add(option);
+        					option = new ArrayList<Integer>();
+        				}
+    				}
+    			}
+    		}
+    	}
+    	return result;
+    }
+    
+    public boolean isValid(String s) {
+    	//leetcode 20
+    	
+    	int numOfParentheses = 0;
+    	int numOfBrackets = 0;
+    	int numOfBraces = 0;
+    	Stack<String> stack = new Stack<String>();
+    	
+    	for(int i=0; i<s.length(); i++) {
+    		char c = s.charAt(i);
+    		String str = String.valueOf(c);
+    		
+    		if(c=='(') {
+    			numOfParentheses++;
+    			stack.push(str);
+    		}
+    		else if(c==')') {
+    			numOfParentheses--;
+    			if(stack.empty()==true) {
+    	    		return false;
+    	    	}
+    			if(stack.peek().equals("(")) {
+    				stack.pop();
+    			}
+    			else {
+    				stack.clear();
+    				return false;
+    			}
+    		}
+			else if(c=='[') {
+				numOfBrackets++;
+				stack.push(str);
+			}
+			else if(c==']') {
+				numOfBrackets--;
+				if(stack.empty()==true) {
+		    		return false;
+		    	}
+				if(stack.peek().equals("[")) {
+    				stack.pop();
+    			}
+    			else {
+    				stack.clear();
+    				return false;
+    			}
+			}
+			else if(c=='{') {
+				numOfBraces++;
+				stack.push(str);
+			}
+			else if(c=='}') {
+				numOfBraces--;
+				
+				if(stack.empty()==true) {
+					return false;
+				}
+				
+				if(stack.peek().equals("{")) {
+    				stack.pop();
+    			}
+    			else {
+    				stack.clear();
+    				return false;
+    			}
+			}
+    	}
+    	
+    	if(stack.empty()==false) {
+    		return false;
+    	}
+    	
+    	if(numOfParentheses == 0 && numOfBrackets == 0 && numOfBraces == 0) {
+    		return true;
+    	}
+    	else { 
+    		return false;
+    	}
+    }
+    
+    public int removeDuplicates(int[] nums) {
+        Set<Integer> set = new HashSet<Integer>();
+        
+        if(nums.length==0) {
+        	return 0;
+        }
+        
+    	for(int i=0; i<nums.length; i++) {
+    		set.add(nums[i]);
+    	}
+        
+        return set.size();
+    }
+    
+    
 	public int strongPasswordChecker(String password) {
 		//leetcode 420
 		//need modification on repeating
