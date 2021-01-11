@@ -206,6 +206,71 @@ public class LeetCodeMethods {
 		return result;
 	}
 	
+	public int myAtoi(String s) {
+        //leetcode 8
+		int startAt = 0;
+		int endWith = 0;
+		boolean isDecimal = false;
+		int result=0;
+		for (int i=0; i<s.length(); i++) {
+			if(startAt==0) {
+				if(s.charAt(i)=='-'||s.charAt(i)=='+') {
+					startAt = i;
+				}
+				else if(s.charAt(i)=='.') {
+					
+				}
+//				else if() {
+//					
+//				}
+				else {
+					return 0;
+				}
+			}
+			else {
+				if(isDecimal==false) {
+					
+				}
+				else {
+					
+				}
+			}
+			
+		}
+		
+		return 0;
+    }
+	
+	public int maxArea(int[] height) {
+        //leetcode 11
+		int area = 0;
+		for(int i=1; i<height.length; i++) {
+			int currentArea = 0;
+			for(int j=0; j<i; j++) {
+				if(height[i]<=height[j]) {
+					currentArea = (i-j)*height[i];
+				}
+				else {
+					currentArea = (i-j)*height[j];
+				}
+				
+				if(currentArea>area) {
+					area = currentArea;
+				}
+				
+			}
+		}
+		
+		return area;
+    }
+	
+	private boolean isOutRange(int x) {
+		if(Math.abs(x)>Math.pow(2, 31)) {
+			return true;
+		}
+		return false;
+	}
+	
 	public int strongPasswordChecker(String password) {
 		//leetcode 420
 		//need modification on repeating

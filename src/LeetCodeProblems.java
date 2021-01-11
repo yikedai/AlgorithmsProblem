@@ -8,8 +8,8 @@ public class LeetCodeProblems {
 		//System.out.println(lcm.longestPalindrome("ababacbbcab"));
 		
 		//System.out.println(lcm.convert("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 7));
-		
-		System.out.println(lcm.reverse(-12303));
+		int array [] = {1,2,3,4,5,6,2,3,4};
+		System.out.println(lcm.maxArea(array));
 	}
 
 }
