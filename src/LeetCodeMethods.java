@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -247,14 +248,6 @@ public class LeetCodeMethods {
 		
 		return 0;
     }
-	
-	private boolean isOutRange(int x) {
-		if(Math.abs(x)>Math.pow(2, 31)) {
-			return true;
-		}
-		return false;
-	}
-	
 	
 	public int maxArea(int[] height) {
         //leetcode 11
@@ -535,7 +528,8 @@ public class LeetCodeMethods {
     }
     
     public int removeDuplicates(int[] nums) {
-        Set<Integer> set = new HashSet<Integer>();
+        //leetcode 26
+    	Set<Integer> set = new HashSet<Integer>();
         
         if(nums.length==0) {
         	return 0;
@@ -544,10 +538,200 @@ public class LeetCodeMethods {
     	for(int i=0; i<nums.length; i++) {
     		set.add(nums[i]);
     	}
+    	
+    	//System.out.println(set.toArray());
         
         return set.size();
     }
     
+    public int removeElement(int[] nums, int val) {
+        //leetcode 27
+    	ArrayList<Integer> list = new ArrayList<Integer>();
+    	
+    	for(int i: nums) {
+    		if(i!=val) {
+    			list.add(i);
+    		}
+    	}
+    	
+    	return list.size();
+    }
+    
+    public int strStr(String haystack, String needle) {
+        //leetcode 28
+    	if(needle.length()>haystack.length()) {
+    		return -1;
+    	}
+    	
+    	if(needle.isEmpty()) {
+    		return 0;
+    	}
+    	
+    	int needleLength = needle.length();
+    	
+    	for(int i=0; i<haystack.length()-needleLength; i++) {
+    		String str = haystack.substring(i, i+needleLength);
+    		if(str.equals(needle)) {
+    			return i;
+    		}
+    	}
+    	
+    	return -1;
+    }
+    
+    public int divide(int dividend, int divisor) {
+        //leetcode 29
+    	int result = 0;
+    	boolean pOrN = true;//true means result is a positive value
+    	if(divisor==0) {
+    		return 0;
+    	}
+    	if((dividend>=0&&divisor<0)||(dividend<0&&divisor>0)) {
+    		pOrN = false;
+    	}
+    	
+    	dividend = Math.abs(dividend);
+    	divisor = Math.abs(divisor);
+    	
+    	int add = 0;
+    	while(add<=dividend) {
+    		add+=divisor;
+    		result++;
+    	}
+    	
+    	if(pOrN==false) {
+    		result = Math.negateExact(result);
+    	}
+    	return result;
+    }
+    
+    Set<String> leetcode30 = new HashSet<String>();
+    public List<Integer> findSubstring(String s, String[] words) {
+    	//leetcode 30
+    	List<Integer> result = new ArrayList<Integer>();
+    	List<String> combination = permutation(s);
+    	
+    	
+    	
+    	
+    	return result;
+    }
+    public ArrayList<String> permutation(String str) { 
+	    return permutation("", str); 
+	}
+	public ArrayList<String> permutation(String prefix, String str) {
+	    int n = str.length();
+	    if (n == 0) {
+	    	leetcode30.add(prefix);
+	    }
+	    else {
+	        for (int i = 0; i < n; i++) {
+	            permutation(prefix + str.charAt(i), str.substring(0, i) + str.substring(i+1, n));
+	        }
+	    }
+	    ArrayList<String> result = new ArrayList<String>();
+	    
+	    for(String s: leetcode30) {
+	    	result.add(s);
+	    }
+	    Collections.sort(result);
+	    return result;
+	}
+    
+//    public ArrayList<String> randomizedAlgorithmForPermutation(String s){
+//    	Set<String> comb = new HashSet<String>();
+//    	ArrayList<String> result = new ArrayList<String>();
+//    	
+//    	int length = s.length();
+//    	long number = 1;
+//    	for(int i=2; i<=length; i++) {
+//    		number*=i;
+//    	}
+//    	
+//    	while(comb.size()<number) {
+//    		comb.add(s);
+//    		s=swap(s);
+//    	}
+//    	
+//    	for(String str: comb) {
+//    		result.add(str);
+//    	}
+//    	Collections.sort(result);
+//    	return result;
+//    }
+    
+    public String swap(String s) {
+    	int l = (int)(Math.random()*(s.length()));
+    	int r = (int)(Math.random()*(s.length()));
+    	while(l==r) {
+    		r = (int)(Math.random()*(s.length()));
+    	}
+    	char [] charArray = s.toCharArray();
+    	char temp = charArray[l];
+    	charArray[l] = charArray[r];
+    	charArray[r] = temp;
+    	
+    	s = String.valueOf(charArray);
+    	return s;
+    }
+    
+    public boolean isValidSudoku(char[][] board) {
+    	//leetcode 36
+    	if(checkHorizontalSudoku(board)&&checkVerticalSudoku(board)&&checkSquareSudoku(board)) {
+    		return true;
+    	}
+    	
+    	return false;
+    }
+    
+    private boolean checkHorizontalSudoku(char[][]board) {
+    	for(int i=0; i<9; i++) {
+    		Set<String> horizontalLine = new HashSet<String>();
+    		for(int j=0; j<9; j++) {
+    			horizontalLine.add(String.valueOf(board[i][j]));
+    		}
+    		if(horizontalLine.size()!=9) {
+    			return false;
+    		}
+    	}
+    	return true;
+    }
+    private boolean checkVerticalSudoku(char[][]board){
+    	for(int i=0; i<9; i++) {
+    		Set<String> verticalLine = new HashSet<String>();
+    		for(int j=0; j<9; j++) {
+    			verticalLine.add(String.valueOf(board[j][i]));
+    		}
+    		if(verticalLine.size()!=9) {
+    			return false;
+    		}
+    	}
+    	return true;
+    }
+    private boolean checkSquareSudoku(char[][]board){
+    	for(int i=0; i<9; i+=3) {
+    		for(int j=0; j<9; j+=3) {
+    			Set<String> square = new HashSet<String>();
+        		for(int k=j; k<j+3; k++) {
+        			square.add(String.valueOf(board[i][k]));
+        			square.add(String.valueOf(board[i+1][k]));
+        			square.add(String.valueOf(board[i+2][k]));
+        		}
+        		if(square.size()!=9) {
+        			return false;
+        		}
+    		}
+    	}
+    	return true;
+    }
+    
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> result = new ArrayList();
+        for(int i=0; i<candidates.length; i++) {
+        	
+        }
+        return result;
+    }
     
 	public int strongPasswordChecker(String password) {
 		//leetcode 420
