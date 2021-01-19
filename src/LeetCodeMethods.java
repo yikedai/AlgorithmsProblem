@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -732,6 +733,21 @@ public class LeetCodeMethods {
         }
         return result;
     }
+    
+    public int firstMissingPositive(int[] nums) {
+        //leetcode 41
+    	Arrays.sort(nums);
+    	int missing = 1;
+    	for(int i=0; i<nums.length; i++) {
+    		if(nums[i]==missing) {
+    			missing++;
+    		}
+    	}
+    	
+    	return missing;
+    }
+    
+    
     
 	public int strongPasswordChecker(String password) {
 		//leetcode 420
