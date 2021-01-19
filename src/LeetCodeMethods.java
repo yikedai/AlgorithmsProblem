@@ -747,8 +747,6 @@ public class LeetCodeMethods {
     	return missing;
     }
     
-    
-    
 	public int strongPasswordChecker(String password) {
 		//leetcode 420
 		//need modification on repeating
