@@ -747,6 +747,35 @@ public class LeetCodeMethods {
     	return missing;
     }
     
+    public void rotate(int[][] matrix) {
+    	//leetcode 48
+    	
+    	
+    }
+    
+    public double myPow(double x, int n) {
+    	//leetcode 50
+    	double result = 1;
+    	boolean pOrN = true; //true means positive
+    	if(n>0) {
+    		pOrN = true;
+    	}
+    	else if(n==0) {
+    		return 1;
+    	}
+    	else {
+    		pOrN = false;
+    	}
+    	
+    	for(int i=0; i<n; i++) {
+    		result*=x;
+    	}
+    	
+    	if(pOrN==false) {
+    		result = 1/result;
+    	}
+    	return result;
+    }
     
     
 	public int strongPasswordChecker(String password) {
