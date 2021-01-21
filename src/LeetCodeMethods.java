@@ -777,6 +777,32 @@ public class LeetCodeMethods {
     	return result;
     }
     
+    public int maxSubArray(int[] nums) {
+        //leetcode 53
+    	int result = 0;
+    	int positiveNum = 0;
+    	int largestNegative = 0;
+    	
+    	for(int i=0; i<nums.length; i++) {
+    		if(nums[i]>=0) {
+    			result+=nums[i];
+    			positiveNum++;
+    		}
+    	}
+    	
+    	if(positiveNum == 0) {
+    		largestNegative = nums[0];
+    		for(int i=1; i<nums.length; i++) {
+    			if(nums[i]>largestNegative) {
+    				largestNegative = nums[i];
+    			}
+    		}
+    		return largestNegative;
+    	}
+    	
+    	return result;
+    }
+    
     
 	public int strongPasswordChecker(String password) {
 		//leetcode 420
