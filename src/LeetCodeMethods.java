@@ -803,6 +803,42 @@ public class LeetCodeMethods {
     	return result;
     }
     
+    public List<Integer> spiralOrder(int[][] matrix) {
+        //leetcode 54
+    	List<Integer> result = new ArrayList<Integer>();
+    	int row = matrix.length;
+    	int col = matrix[0].length;
+    	
+    	int loopNum = row/2;
+    	if(row%2==1) {
+    		loopNum++;
+    	}
+    	
+    	int count = 0;
+    	while(count<loopNum) {
+    		for(int i=count; i<col-count; i++) {
+    			result.add(matrix[count][i]);
+    		}
+    		if(count==(loopNum-1)) {
+    			break;
+    		}
+    		
+    		for(int j=count; j<row-count; j++) {
+    			result.add(matrix[j][matrix.length-count]);
+    		}
+    		
+    		for(int i=col-count; i>=count; i--) {
+    			result.add(matrix[matrix.length-count][i]);
+    		}
+    		
+    		for(int j=row-count; j>=count; j--) {
+    			result.add(matrix[j][count]);
+    		}
+    		
+    	}
+    
+    	return result;
+    }
     
 	public int strongPasswordChecker(String password) {
 		//leetcode 420
