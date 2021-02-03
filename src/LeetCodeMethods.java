@@ -840,6 +840,35 @@ public class LeetCodeMethods {
     	return result;
     }
     
+    public boolean canJump(int[] nums) {
+    	//leetcode 55
+    	boolean result = false;
+    	int position = 0;
+    	int jump = 0;
+    	
+    	while (jump<nums.length) {
+    		
+    		
+    		
+    	}
+    	
+    	
+    	return result;
+    }
+    
+    public int lengthOfLastWord(String s) {
+    	//leetcode 58
+    	if(s.length()==0) {
+    		return 0;
+    	}
+    	String wordArray [] = s.split(" ");
+    	String result = wordArray[wordArray.length-1];
+    	if(result.length()==0) {
+    		return 0;
+    	}
+    	return result.length();
+    }
+    
 	public int strongPasswordChecker(String password) {
 		//leetcode 420
 		//need modification on repeating
