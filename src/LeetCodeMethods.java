@@ -869,6 +869,26 @@ public class LeetCodeMethods {
     	return result.length();
     }
     
+    public String addBinary(String a, String b) {
+    	//leetcode 67
+    	int result = 0;
+    	for (int i=0; i<a.length(); i++) {
+    		char c = a.charAt(a.length()-1-i);
+    		if(c==1) {
+    			result += 1*Math.pow(2, i);
+    		}
+    	}
+    	
+    	for (int i=0; i<b.length(); i++) {
+    		char c = b.charAt(b.length()-1-i);
+    		if(c==1) {
+    			result += 1*Math.pow(2, i);
+    		}
+    	}
+    	
+    	return Integer.toBinaryString(result);
+    }
+    
 	public int strongPasswordChecker(String password) {
 		//leetcode 420
 		//need modification on repeating
