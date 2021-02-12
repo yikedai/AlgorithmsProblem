@@ -889,6 +889,24 @@ public class LeetCodeMethods {
     	return Integer.toBinaryString(result);
     }
     
+    public int mySqrt(int x) {
+    	//leetcode 69
+    	int result = 0;
+    	for(int i=0; i<=x; i++) {
+    		if(i*i==x) {
+    			result = i;
+    			break;
+    		}
+    		else if(i*i<x) {
+    			if((i+1)*(i+1)>x) {
+    				result = i+1;
+    				break;
+    			}
+    		}
+    	}
+    	return result;
+    }
+    
 	public int strongPasswordChecker(String password) {
 		//leetcode 420
 		//need modification on repeating
